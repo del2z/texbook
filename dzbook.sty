@@ -1,30 +1,42 @@
-%----------------------------------------------------------------------------------------
-%	VARIOUS REQUIRED PACKAGES
-%----------------------------------------------------------------------------------------
+%%--------------------------------------------------------------------------------------------------
+%% This is dzbook package for book layout.
+%% Author: del2z
+%% Date: 2016/02/21
+%% Description: It's modified based on 'Clustering the interstellar medium' by Andrea Hidalgo.
+%%      Please visit https://www.overleaf.com/articles/clustering-the-interstellar-medium/mtthgyyfrdkn
+%%      for detailed information.
+%% License: LaTeX Project Public License 1.3c
+%%--------------------------------------------------------------------------------------------------
 
-\usepackage{titlesec} % Allows customization of titles
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{dzbook}[2016/02/21 dzbook package for book layout]
 
-\usepackage{graphicx} % Required for including pictures
+%%--------------------------------------------------------------------------------------------------
+%% Packages required
+%%--------------------------------------------------------------------------------------------------
+\RequirePackage{titlesec} % Allows customization of titles
+
+\RequirePackage{graphicx} % Required for including pictures
 \graphicspath{{Pictures/}} % Specifies the directory where pictures are stored
 
-\usepackage{lipsum} % Inserts dummy text
+\RequirePackage{lipsum} % Inserts dummy text
 
-\usepackage{tikz} % Required for drawing custom shapes
+\RequirePackage{tikz} % Required for drawing custom shapes
 
-\usepackage[english]{babel} % English language/hyphenation
+\RequirePackage[english]{babel} % English language/hyphenation
 
-\usepackage{enumitem} % Customize lists
+\RequirePackage{enumitem} % Customize lists
 \setlist{nolistsep} % Reduce spacing between bullet points and numbered lists
 
-\usepackage{booktabs} % Required for nicer horizontal rules in tables
+\RequirePackage{booktabs} % Required for nicer horizontal rules in tables
 
-\usepackage{eso-pic} % Required for specifying an image background in the title page
+\RequirePackage{eso-pic} % Required for specifying an image background in the title page
 
 %----------------------------------------------------------------------------------------
 %	MAIN TABLE OF CONTENTS
 %----------------------------------------------------------------------------------------
 
-\usepackage{titletoc} % Required for manipulating the table of contents
+\RequirePackage{titletoc} % Required for manipulating the table of contents
 
 \contentsmargin{0cm} % Removes the default margin
 % Chapter text styling
@@ -70,7 +82,7 @@
 %	PAGE HEADERS
 %----------------------------------------------------------------------------------------
 
-\usepackage{fancyhdr} % Required for header and footer configuration
+\RequirePackage{fancyhdr} % Required for header and footer configuration
 
 \pagestyle{fancy}
 \renewcommand{\chaptermark}[1]{\markboth{\sffamily\normalsize\bfseries\chaptername\ \thechapter.\ #1}{}} % Chapter text font settings
@@ -97,7 +109,7 @@
 %	THEOREM STYLES
 %----------------------------------------------------------------------------------------
 
-\usepackage{amsmath,amsfonts,amssymb,amsthm} % For math equations, theorems, symbols, etc
+\RequirePackage{amsmath,amsfonts,amssymb,amsthm} % For math equations, theorems, symbols, etc
 
 \newcommand{\intoo}[2]{\mathopen{]}#1\,;#2\mathclose{[}}
 \newcommand{\ud}{\mathop{\mathrm{{}d}}\mathopen{}}
@@ -288,7 +300,7 @@ innerbottommargin=5pt]{cBox}
 %----------------------------------------------------------------------------------------
 
 % For an unclear reason, the package should be loaded now and not later
-\usepackage{hyperref}
+\RequirePackage{hyperref}
 \hypersetup{hidelinks,backref=true,pagebackref=true,hyperindex=true,colorlinks=false,breaklinks=true,urlcolor= ocre,bookmarks=true,bookmarksopen=false,pdftitle={Title},pdfauthor={Author}}
 
 %----------------------------------------------------------------------------------------

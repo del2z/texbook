@@ -1,3 +1,4 @@
+%!TEX encoding = UTF-8 Unicode 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  My documentation report
 %  Objetive: Explain what I did and how, so someone can continue with the investigation
@@ -13,8 +14,6 @@
 %----------------------------------------------------------------------------------------
 
 \documentclass[11pt,fleqn]{book} % Default font size and left-justified equations
-
-\usepackage[top=3cm,bottom=3cm,left=3.2cm,right=3.2cm,headsep=10pt,letterpaper]{geometry} % Page margins
 
 \usepackage{xcolor} % Required for specifying colors by name
 \definecolor{ocre}{RGB}{52,177,201} % Define the orange color used for highlighting throughout the book
@@ -33,10 +32,11 @@
 \addbibresource{bibliography.bib} % BibTeX bibliography file
 \defbibheading{bibempty}{}
 
-\input{structure} % Insert the commands.tex file which contains the majority of the structure behind the template
+\usepackage{CJKutf8}
+\usepackage[zh]{dzbook}
+%\input{structure} % Insert the commands.tex file which contains the majority of the structure behind the template
 
 \begin{document}
-
 %----------------------------------------------------------------------------------------
 %	TITLE PAGE
 %----------------------------------------------------------------------------------------
@@ -67,7 +67,7 @@
 
 \noindent \textsc{github.com/LaurethTeX/Clustering}\\ % URL
 
-\noindent This research was done under the supervision of Dr. Pauline Barmby with the financial support of the MITACS Globalink Research Internship Award within a total of 12 weeks, from June 16th to September 5th of 2014.\\ % License information
+\noindent This research was done under the supervision of Dr. Pauline Barmby with the financial support of the MITACS Globalink Research Internship Award within a total of 12 weeks, from June 16th to September 5th of 2014. \\ % License information
 
 \noindent \textit{First release, August 2014} % Printing/edition date
 
@@ -94,6 +94,7 @@
 \chapter{Introduction}
 
 \section{Motivation}\index{Motivation}
+这是中文测试。
 When I applied for the summer research internship, the title of the project was \emph{The many colours of nearby galaxies} an the description was
 \begin{quote}
 The different populations of stars in a galaxy carry the record of its past star formation history, and also affect its future. The project involves  analyzing Hubble Space Telescopes images of nearby galaxies of different types. By measuring the brightness and colours of millions of stars, we can understand the ages and compositions of the stars, and learn how the galaxy formed stars in the past. The radiation emitted by stars affects the gas in a galaxy, and thus how it will form stars in the future. We will use multi-colour images of galaxies to gain new insights into both their past and future.
@@ -385,8 +386,6 @@ Now let's start with basic concepts that vary from an engineering to an astronom
   \caption{Summary of Observations}
   \label{tab:uno}
 \end{table}
-%Poner aqui la tabla con los datos de acada filtro
-%No olvidar poner en GitHub el programa de como hacer el cube y tammbien el de reproject cube con montrage wrapper
 
 \section{Preprocessing your data}
 This section is where you prepare your data to be processed, you have to make sure that all your images have the same grid size, same spatial resolution, less possible quantity of outliers abd noise and same coordinate system. Now, what are those things? Same grid size means that your images must have the same pixel size, in the dataset we are processing we don't have to worry about this, the pixel size is 0.0396 arcsec/pixel. Now, spatial resoultion, each image has it's own spatial resolution depending on the filter that was used to get the observation, the number that you will be looking for is the FWHM that describes the PSF of every image. When you have all the FWHM for all the images you should choose the largest which corresponds to the poorest spatial resolution and create a convolution kernel with \emph{Tiny Tim} or use a gaussian kernel calculated with \emph{Astropy} and convolve all the images with that kernel. This exactly what I did, if you look at image \ref{img:conv}, you will see the before and after convolution. In table \ref{tab:dos} you can see how I chose the number for the FWHM.
@@ -464,7 +463,6 @@ Well, what I wrote before it is a brief summary of what I did, but I'm sure that
 This section is explained at lenght in the GitHub page, there you will find my codes and some helpful links, \url{https://github.com/LaurethTeX/Clustering/blob/master/Preprocessing.md}
 
 \section{Software available}
-%Como hacer preprocessing en los datos
 For doing data preprocessing there are a bunch of softwares available, even there is one being developed by Sophia Lianou called \emph{imagecube} which, when it is finished, will be one of the best, has everything you need in one package. I'll say that this part is yours to discover, everyday there are more and more being released or new versions of the existent ones but in the meanwhile it will depend entirely on you, which software you want to use. For \emph{Python} all the functions you will need can be found in the \emph{Astropy} module, \textbf{check the API!!!.}
 
 
@@ -508,11 +506,11 @@ The first step to experiment with this method is Train. Here, the important vari
     
     The output files from the experiment that will show us our results are, 
     \begin{itemize}
-    	\item \emph{E\_SOM\_Train\/Test\/Run\_Results.txt}: File that, for each pattern, 
+    	\item \emph{E\_SOM\_Train/cgTest/Run\_Results.txt}: File that, for each pattern, 
 reports ID, features, BMU, cluster and activation of winner node
-		\item \emph{E\_SOM\_Train\/Test\/Run\_Histogram.png}: Histogram of clusters found 
-        \item \emph{E\_SOM\_Train\/Test\/Run\_U\_matrix.png}: U-Matrix image 
-        \item \emph{E\_SOM\_Train\/Test\/Run\_Clusters.txt}: File that, for each clusters, reports label, number of pattern assigned, percentage of association respect total number of pattern and its centroids. 
+		\item \emph{E\_SOM\_Train/cgTest/Run\_Histogram.png}: Histogram of clusters found 
+        \item \emph{E\_SOM\_Train/cgTest/Run\_U\_matrix.png}: U-Matrix image 
+        \item \emph{E\_SOM\_Train/cgTest/Run\_Clusters.txt}: File that, for each clusters, reports label, number of pattern assigned, percentage of association respect total number of pattern and its centroids. 
         \item \emph{E\_SOM\_Train\_Datacube\_image.zip}: Archive that includes the 
 clustered images of each slice of a datacube.\footnote{I have my doubts whether this file is produced or not, in none of my test was produced, you might need to contact the developers and ask about this.}
     \end{itemize}
@@ -732,42 +730,27 @@ In this case three of the experiments ended and none od them failed (yet), here 
     \label{img:matrixended}
 \end{figure}
  There is work to be done for this cases, understand what is going on and interpret correctly the results, but last we got some.
+
 \subsection{CSOM}
 %one image
-Well, as I mentioned before I did some tests using the ESOM method but since I wasn{t getting any results I thougth of testing this methond, as always I strongly recommend to read carefully its manual, \url{http://dame.dsf.unina.it/documents/SOFM_UserManual_DAME-MAN-NA-0014-Rel1.1.pdf} and fully undesrtand what is going on behind the curtains. In the meanwhile, this is my own explanation. This method uses FITS files, does not support datacubes, speciffically uses a neighborhood function in order to preserve the topological properties of the input space, it is a type of artificial network and is mainly unsupervised learning  and produces a low dimensional discretized representation of the input space of the training samples. I in this case you can choose the number of clusters/neurons in the first layer (neural network), the diameter, number of layers (in the neural network), learning rate and variance  on each layer. Here you have more input parameters to control.
+Well, as I mentioned before I did some tests using the ESOM method but since I wasn't getting any results I thougth of testing this methond, as always I strongly recommend to read carefully its manual, \url{http://dame.dsf.unina.it/documents/SOFM_UserManual_DAME-MAN-NA-0014-Rel1.1.pdf} and fully undesrtand what is going on behind the curtains. In the meanwhile, this is my own explanation. This method uses FITS files, does not support datacubes, speciffically uses a neighborhood function in order to preserve the topological properties of the input space, it is a type of artificial network and is mainly unsupervised learning  and produces a low dimensional discretized representation of the input space of the training samples. I in this case you can choose the number of clusters/neurons in the first layer (neural network), the diameter, number of layers (in the neural network), learning rate and variance  on each layer. Here you have more input parameters to control.
 \subsubsection{Expected Results}
 Well in this case, since only FITS images are allowed, what we expect to find are areas indeitfying the different objects in the interstellar medium.
 
 The important results in this case, are got in the \emph{Run} and \emph{Test} steps, in the \emph{Train} step only the network configuration is outputted. What we are interested on seein are the plotted clusters.
 \subsubsection{Tests}
 In this case I did some tests on the CSOM workspace, but none of the, where succesful, too many input variables to control and test. So, in this case I will leave this parameters free for you to try. I do believe that tis method could be very useful and if you find a way to input the datacube in a different configuration you will get some interesting results, due to the fact that in this method the preservation of the topology is one of the main principles.
-%Mencionar los dos metodos de DAMEWARE
-%Explicar los dos metodos, como untroduciste los datos, el objectivo de cada uno
-
-%Lo que se espera obtener de cada uno de los experimentos, uno es en una sola imagen y el otro es en el datacube
-%Los archivos que se obtienen y lo que significas, lo que se puede hacer
-
-
-
-%Poner los parametros que se han elegido en los experimentos fallidos, y los que siguen en modo running
-%Exlpicar por fases los experimentos que se intentaron
 
 
 \section{Further work}
 Well, finally we reached the point where I my time in Canada finished and I this research is still on its first stages. I have so many ideas of how to explore the clustering techniques in the DAME platform, MatLab, Python and everything else that can be tested. 
 
 \subsection{Some interesting ideas}
-%Normalizar los datos
-%Acomodarlos y hacer que los paquetes sean mas pequeños
-%Random points
 For now, I would say that your best chance here, is to device an efficient way to input the information contained in a datacube as a list of points with values and reduce its dimensionality by randomly choosing them on every layer. If you are ever stuck, or no new ideas come to your mind, do not hesitate to contact me I might have a new interesting idea you can test.
 
 \subsection{Links you should check out}
 Most of them are listed in the useful resourses section of The Caltech-JPL Summer School on Big Data Analytics, the webpage \url{https://class.coursera.org/bigdataschool-001/wiki/Useful_resources}, you may need to create an account in Coursera and enroll in the course. And the rest of them are located in the References section on my GitHub page, \url{https://github.com/LaurethTeX/Clustering/blob/master/References.md}.
-%Los links que estan en la pagina de el curso de caltech
-%Sky surveys
-%MATLAB SOM toolbox
-%SAO datamining
+
 \vfill
 \textit{Wish you all the best, Andrea Hidalgo}
 \end{document}

@@ -32,26 +32,16 @@
 \addbibresource{bibliography.bib} % BibTeX bibliography file
 \defbibheading{bibempty}{}
 
-\usepackage{CJKutf8}
-\usepackage[zh]{dzbook}
+\usepackage[zh,pub]{dzbook}
 %\input{structure} % Insert the commands.tex file which contains the majority of the structure behind the template
 
 \begin{document}
 %----------------------------------------------------------------------------------------
 %	TITLE PAGE
 %----------------------------------------------------------------------------------------
-
-\begingroup
-\thispagestyle{empty}
-\AddToShipoutPicture*{\put(0,0){\includegraphics[scale=1.25]{esahubble}}} % Image background
-\centering
-\vspace*{5cm}
-\par\normalfont\fontsize{35}{35}\sffamily\selectfont
-\textbf{Clustering the interstellar medium}\\
-{\LARGE Data Mining and Machine Learning in Astronomy}\par % Book title
-\vspace*{1cm}
-{\Huge Andrea Hidalgo}\par % Author name
-\endgroup
+\title{Data Mining and Machine Learning in Astronomy}
+\author{Andrea Hidalgo}
+\makecover
 
 %----------------------------------------------------------------------------------------
 %	COPYRIGHT PAGE
@@ -94,7 +84,7 @@
 \chapter{Introduction}
 
 \section{Motivation}\index{Motivation}
-这是中文测试。
+{\songti 这是常规字体。}{\heiti 这是常规字体。}{\kaishu 这是无衬线字体。}{\yahei 这是加粗字体。}{\xingshu 这是斜体字体。}
 When I applied for the summer research internship, the title of the project was \emph{The many colours of nearby galaxies} an the description was
 \begin{quote}
 The different populations of stars in a galaxy carry the record of its past star formation history, and also affect its future. The project involves  analyzing Hubble Space Telescopes images of nearby galaxies of different types. By measuring the brightness and colours of millions of stars, we can understand the ages and compositions of the stars, and learn how the galaxy formed stars in the past. The radiation emitted by stars affects the gas in a galaxy, and thus how it will form stars in the future. We will use multi-colour images of galaxies to gain new insights into both their past and future.

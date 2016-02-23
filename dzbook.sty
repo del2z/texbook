@@ -11,22 +11,14 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{dzbook}[2016/02/21 dzbook package for book layout]
 
-\DeclareOption{zh}{\def\dz@lang{c}}
-\DeclareOption{en}{\def\dz@lang{e}}
-\DeclareOption*{\def\dz@lang{e}\OptionNotUsed}
-\ProcessOptions
+\newif\ifdz@lang@zh\dz@lang@zhfalse
+\newif\ifdz@print@pub\dz@print@pubfalse
 
-\if c\dz@lang %
-  \RequirePackage{CJKutf8}%
-  \def\dz@beginCJK{\begin{CJK}{UTF8}{song}}%
-  \def\dz@endCJK{\clearpage\end{CJK}}%
-  \let\dz@begindocumenthook\@begindocumenthook%
-  \let\dz@enddocumenthook\@enddocumenthook%
-  \def\AtBeginDocument{\g@addto@macro\dz@begindocumenthook}%
-  \def\AtEndDocument{\g@addto@macro\dz@enddocumenthook}%
-  \def\@begindocumenthook{\dz@begindocumenthook\dz@beginCJK}%
-  \def\@enddocumenthook{\dz@endCJK\dz@enddocumenthook}%
-\fi
+\DeclareOption{zh}{\dz@lang@zhtrue}
+\DeclareOption{pub}{\dz@print@pubtrue}
+\DeclareOption*{\OptionNotUsed}
+\ProcessOptions\relax
+
 %%--------------------------------------------------------------------------------------------------
 %% Packages required
 %%--------------------------------------------------------------------------------------------------
@@ -42,10 +34,49 @@
 \RequirePackage{booktabs} % Required for nicer horizontal rules in tables
 \RequirePackage{eso-pic} % Required for specifying an image background in the title page
 
+%%--------------------------------------------------------------------------------------------------
+%% Add Chinese support
+%%--------------------------------------------------------------------------------------------------
+\ifdz@lang@zh %
+  \RequirePackage{CJKutf8}%
+  \def\dz@beginCJK{\begin{CJK}{UTF8}{song}}%
+  \def\dz@endCJK{\clearpage\end{CJK}}%
+  \let\dz@begindocumenthook\@begindocumenthook%
+  \let\dz@enddocumenthook\@enddocumenthook%
+  \def\AtBeginDocument{\g@addto@macro\dz@begindocumenthook}%
+  \def\AtEndDocument{\g@addto@macro\dz@enddocumenthook}%
+  \def\@begindocumenthook{\dz@begindocumenthook\dz@beginCJK}%
+  \def\@enddocumenthook{\dz@endCJK\dz@enddocumenthook}%
+
+  \gdef\songti{\CJKfamily{song}}
+  \gdef\heiti{\CJKfamily{hei}}
+  \gdef\kaishu{\CJKfamily{kai}}
+  \gdef\yahei{\CJKfamily{yahei}}
+  \gdef\fangsong{\CJKfamily{fang}}
+  \gdef\lishu{\CJKfamily{li}}
+  \gdef\xingshu{\CJKfamily{xing}}
+  \gdef\youyuan{\CJKfamily{you}}
+\fi
+
+%%--------------------------------------------------------------------------------------------------
+%% Cover and title page
+%%--------------------------------------------------------------------------------------------------
+\newcommand*{\makecover}{%
+  \begingroup
+    \thispagestyle{empty}
+    \AddToShipoutPicture*{\put(0,0){\includegraphics[scale=1.25]{esahubble}}} % Image background
+    \centering
+    \vspace*{5cm}
+    {\fontsize{30}{40}\sffamily\bfseries\selectfont \@title\par} % Book title
+    \vspace*{2cm}
+    {\Huge\@author\par} % Author name
+  \endgroup
+}
+
+
 %----------------------------------------------------------------------------------------
 %	MAIN TABLE OF CONTENTS
 %----------------------------------------------------------------------------------------
-
 \RequirePackage{titletoc} % Required for manipulating the table of contents
 
 \contentsmargin{0cm} % Removes the default margin
@@ -91,7 +122,6 @@
 %----------------------------------------------------------------------------------------
 %	PAGE HEADERS
 %----------------------------------------------------------------------------------------
-
 \RequirePackage{fancyhdr} % Required for header and footer configuration
 
 \pagestyle{fancy}
@@ -120,6 +150,8 @@
 %----------------------------------------------------------------------------------------
 
 \RequirePackage{amsmath,amsfonts,amssymb,amsthm} % For math equations, theorems, symbols, etc
+\numberwithin{equation}{section}
+\numberwithin{figure}{section}
 
 \newcommand{\intoo}[2]{\mathopen{]}#1\,;#2\mathclose{[}}
 \newcommand{\ud}{\mathop{\mathrm{{}d}}\mathopen{}}

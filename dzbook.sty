@@ -12,10 +12,8 @@
 \ProvidesPackage{dzbook}[2016/02/21 dzbook package for book layout]
 
 \newif\ifdz@lang@zh\dz@lang@zhfalse
-\newif\ifdz@print@pub\dz@print@pubfalse
 
 \DeclareOption{zh}{\dz@lang@zhtrue}
-\DeclareOption{pub}{\dz@print@pubtrue}
 \DeclareOption*{\OptionNotUsed}
 \ProcessOptions\relax
 
@@ -33,6 +31,7 @@
 \setlist{nolistsep} % Reduce spacing between bullet points and numbered lists
 \RequirePackage{booktabs} % Required for nicer horizontal rules in tables
 \RequirePackage{eso-pic} % Required for specifying an image background in the title page
+\RequirePackage{xcolor} % Required for specifying colors by name
 
 %%--------------------------------------------------------------------------------------------------
 %% Add Chinese support
@@ -59,21 +58,33 @@
 \fi
 
 %%--------------------------------------------------------------------------------------------------
-%% Cover and title page
+%% Cover, title page and watermark
 %%--------------------------------------------------------------------------------------------------
+\newcommand{\thewatermarkangle}{}
+\newcommand{\thewatermarktext}{}
+\newcommand{\watermark}[2]{%
+  \renewcommand{\thewatermarkangle}{#1}%
+  \renewcommand{\thewatermarktext}{#2}}
+
 \newcommand*{\makecover}{%
   \begingroup
+    \AddToShipoutPictureBG{\put(0,0){%
+      \makebox[\paperwidth]{\rotatebox{\thewatermarkangle}{%
+        \textcolor[gray]{0.75}{\fontsize{6cm}{6cm}\selectfont\thewatermarktext}}}}}
     \thispagestyle{empty}
-    \AddToShipoutPicture*{\put(0,0){\includegraphics[scale=1.25]{esahubble}}} % Image background
     \centering
-    \vspace*{5cm}
-    {\fontsize{30}{40}\sffamily\bfseries\selectfont \@title\par} % Book title
-    \vspace*{2cm}
-    {\Huge\@author\par} % Author name
+    \AddToShipoutPicture*{\put(0,0){\includegraphics[scale=1.25]{esahubble}}} % Image background
+    \vspace*{5cm}\relax
+    \noindent\parbox{\textwidth}{\centering\fontsize{32}{45}\sffamily\bfseries\selectfont\@title} % Book title
+    \par\vspace*{2.5cm}\relax
+    \noindent\makebox{\Huge\@author} % Author name
+    \par\vfill\relax
   \endgroup
 }
 
+\renewcommand{\maketitle}{%
 
+}
 %----------------------------------------------------------------------------------------
 %	MAIN TABLE OF CONTENTS
 %----------------------------------------------------------------------------------------

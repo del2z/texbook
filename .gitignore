@@ -1,0 +1,10 @@
+SCHEDULE
+*.aux
+*.bcf
+*.log
+*.out
+*.pdf
+*.ptc
+*.run.xml
+*.synctex.gz
+*.toc

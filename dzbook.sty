@@ -60,26 +60,38 @@
 %%--------------------------------------------------------------------------------------------------
 %% Cover, title page and watermark
 %%--------------------------------------------------------------------------------------------------
+\newif\ifdz@watermark\dz@watermarkfalse
 \newcommand{\thewatermarkangle}{}
 \newcommand{\thewatermarktext}{}
-\newcommand{\watermark}[2]{%
+\newcommand{\watermark}[2][60]{%
+  \dz@watermarktrue%
   \renewcommand{\thewatermarkangle}{#1}%
   \renewcommand{\thewatermarktext}{#2}}
 
 \newcommand*{\makecover}{%
-  \begingroup
+  \ifdz@watermark %
     \AddToShipoutPictureBG{\put(0,0){%
-      \makebox[\paperwidth]{\rotatebox{\thewatermarkangle}{%
-        \textcolor[gray]{0.75}{\fontsize{6cm}{6cm}\selectfont\thewatermarktext}}}}}
+      \makebox(\LenToUnit{\paperwidth},\LenToUnit{\paperheight}){\rotatebox{\thewatermarkangle}{%
+        \textcolor[gray]{0.75}{\fontsize{5cm}{5cm}\selectfont\thewatermarktext}}}}}
+  \fi
+  \begin{center}
     \thispagestyle{empty}
-    \centering
     \AddToShipoutPicture*{\put(0,0){\includegraphics[scale=1.25]{esahubble}}} % Image background
     \vspace*{5cm}\relax
+    %\noindent\makebox[\paperwidth]{\hskip-\Gm@lmargin\rlap{This is margin}}
+    %\begin{tikzpicture}[thick,fill opacity=0.5]
+    %\draw (0, 0) rectangle (\paperwidth, 3cm);
+    %\filldraw[fill=red] (0:1cm) circle (12mm);
+    %\filldraw[fill=green] (120:1cm) circle (12mm);
+    %\filldraw[fill=blue] (-120:1cm) circle (12mm);
+    %\node at (0,0) {\huge A};
+    %\node[fill opacity=0.5] at (3,2) {\huge B};
+    %\end{tikzpicture}
     \noindent\parbox{\textwidth}{\centering\fontsize{32}{45}\sffamily\bfseries\selectfont\@title} % Book title
     \par\vspace*{2.5cm}\relax
     \noindent\makebox{\Huge\@author} % Author name
     \par\vfill\relax
-  \endgroup
+  \end{center}
 }
 
 \renewcommand{\maketitle}{%

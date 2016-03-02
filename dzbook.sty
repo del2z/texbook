@@ -92,14 +92,26 @@
         \end{tikzpicture}};
     \end{tikzpicture}
   \endgroup
+  \clearpage
 }
 
 \renewcommand{\maketitle}{%
-
+  \cleardoublepage%
+  \thispagestyle{empty}
+  \begin{flushleft}
+    \vspace*{1.5cm}
+    \parbox{\textwidth}{\fontsize{36}{48}\sffamily\bfseries\selectfont\@title}
+    \par\vspace*{2.5cm}\relax
+    {\Huge\@author}
+    \par\vspace*{0.5cm}\relax
+    {\Huge\@date}
+  \end{flushleft}
+  \clearpage
 }
-%----------------------------------------------------------------------------------------
-%	MAIN TABLE OF CONTENTS
-%----------------------------------------------------------------------------------------
+
+%%--------------------------------------------------------------------------------------------------
+%% table of contents
+%%--------------------------------------------------------------------------------------------------
 \RequirePackage{titletoc} % Required for manipulating the table of contents
 
 \contentsmargin{0cm} % Removes the default margin

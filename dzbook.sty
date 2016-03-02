@@ -23,7 +23,7 @@
 \RequirePackage[top=3cm,bottom=3cm,left=3.2cm,right=3.2cm,headsep=10pt,letterpaper]{geometry} % Page margins
 \RequirePackage{titlesec} % Allows customization of titles
 \RequirePackage{graphicx} % Required for including pictures
-\graphicspath{{Pictures/}} % Specifies the directory where pictures are stored
+\graphicspath{{image/}} % Specifies the directory where pictures are stored
 \RequirePackage{lipsum} % Inserts dummy text
 \RequirePackage{tikz} % Required for drawing custom shapes
 \RequirePackage[english]{babel} % English language/hyphenation
@@ -32,6 +32,7 @@
 \RequirePackage{booktabs} % Required for nicer horizontal rules in tables
 \RequirePackage{eso-pic} % Required for specifying an image background in the title page
 \RequirePackage{xcolor} % Required for specifying colors by name
+\definecolor{dzblue}{RGB}{52,177,201}
 
 %%--------------------------------------------------------------------------------------------------
 %% Add Chinese support
@@ -74,24 +75,23 @@
       \makebox(\LenToUnit{\paperwidth},\LenToUnit{\paperheight}){\rotatebox{\thewatermarkangle}{%
         \textcolor[gray]{0.75}{\fontsize{5cm}{5cm}\selectfont\thewatermarktext}}}}}
   \fi
-  \begin{center}
+  \begingroup
     \thispagestyle{empty}
     \AddToShipoutPicture*{\put(0,0){\includegraphics[scale=1.25]{esahubble}}} % Image background
-    \vspace*{5cm}\relax
-    %\noindent\makebox[\paperwidth]{\hskip-\Gm@lmargin\rlap{This is margin}}
-    %\begin{tikzpicture}[thick,fill opacity=0.5]
-    %\draw (0, 0) rectangle (\paperwidth, 3cm);
-    %\filldraw[fill=red] (0:1cm) circle (12mm);
-    %\filldraw[fill=green] (120:1cm) circle (12mm);
-    %\filldraw[fill=blue] (-120:1cm) circle (12mm);
-    %\node at (0,0) {\huge A};
-    %\node[fill opacity=0.5] at (3,2) {\huge B};
-    %\end{tikzpicture}
-    \noindent\parbox{\textwidth}{\centering\fontsize{32}{45}\sffamily\bfseries\selectfont\@title} % Book title
-    \par\vspace*{2.5cm}\relax
-    \noindent\makebox{\Huge\@author} % Author name
-    \par\vfill\relax
-  \end{center}
+    \begin{tikzpicture}[remember picture,overlay]
+      \node at (current page.north west) {%
+        \begin{tikzpicture}[remember picture,overlay]
+          \draw[anchor=west] (0cm,-0.4\paperheight) node [fill=dzblue!10!white,text opacity=1,line width=0pt,fill opacity=.5,inner sep=0pt]{%
+            \parbox{\paperwidth}{%
+              \centering
+              \vspace*{0.8cm}\relax
+              \parbox{\textwidth}{\centering\fontsize{36}{48}\sffamily\bfseries\selectfont\@title}
+              \par\vspace*{2.5cm}\relax
+              \makebox{\Huge\@author}
+              \par\vspace*{0.5cm}}};
+        \end{tikzpicture}};
+    \end{tikzpicture}
+  \endgroup
 }
 
 \renewcommand{\maketitle}{%
@@ -106,9 +106,9 @@
 % Chapter text styling
 \titlecontents{chapter}[1.25cm] % Indentation
 {\addvspace{15pt}\large\sffamily\bfseries} % Spacing and font options for chapters
-{\color{ocre!60}\contentslabel[\Large\thecontentslabel]{1.25cm}\color{ocre}} % Chapter number
+{\color{dzblue!60}\contentslabel[\Large\thecontentslabel]{1.25cm}\color{dzblue}} % Chapter number
 {}
-{\color{ocre!60}\normalsize\sffamily\bfseries\;\titlerule*[.5pc]{.}\;\thecontentspage} % Page number
+{\color{dzblue!60}\normalsize\sffamily\bfseries\;\titlerule*[.5pc]{.}\;\thecontentspage} % Page number
 % Section text styling
 \titlecontents{section}[1.25cm] % Indentation
 {\addvspace{5pt}\sffamily\bfseries} % Spacing and font options for sections
@@ -189,10 +189,10 @@
 {0pt}% Space below
 {\normalfont}% % Body font
 {}% Indent amount
-{\small\bf\sffamily\color{ocre}}% % Theorem head font
+{\small\bf\sffamily\color{dzblue}}% % Theorem head font
 {\;}% Punctuation after theorem head
 {0.25em}% Space after theorem head
-{\small\sffamily\color{ocre}\thmname{#1}\nobreakspace\thmnumber{\@ifnotempty{#1}{}\@upn{#2}}% Theorem text (e.g. Theorem 2.1)
+{\small\sffamily\color{dzblue}\thmname{#1}\nobreakspace\thmnumber{\@ifnotempty{#1}{}\@upn{#2}}% Theorem text (e.g. Theorem 2.1)
 \thmnote{\nobreakspace\the\thm@notefont\sffamily\bfseries\color{black}---\nobreakspace#3.}} % Optional theorem note
 \renewcommand{\qedsymbol}{$\blacksquare$}% Optional qed square
 
@@ -226,10 +226,10 @@
 {5pt}% Space below
 {\normalfont}% % Body font
 {}% Indent amount
-{\small\bf\sffamily\color{ocre}}% % Theorem head font
+{\small\bf\sffamily\color{dzblue}}% % Theorem head font
 {\;}% Punctuation after theorem head
 {0.25em}% Space after theorem head
-{\small\sffamily\color{ocre}\thmname{#1}\nobreakspace\thmnumber{\@ifnotempty{#1}{}\@upn{#2}}% Theorem text (e.g. Theorem 2.1)
+{\small\sffamily\color{dzblue}\thmname{#1}\nobreakspace\thmnumber{\@ifnotempty{#1}{}\@upn{#2}}% Theorem text (e.g. Theorem 2.1)
 \thmnote{\nobreakspace\the\thm@notefont\sffamily\bfseries\color{black}---\nobreakspace#3.}} % Optional theorem note
 \renewcommand{\qedsymbol}{$\blacksquare$}% Optional qed square
 \makeatother
@@ -260,7 +260,7 @@
 \newmdenv[skipabove=7pt,
 skipbelow=7pt,
 backgroundcolor=black!5,
-linecolor=ocre,
+linecolor=dzblue,
 innerleftmargin=5pt,
 innerrightmargin=5pt,
 innertopmargin=5pt,
@@ -275,8 +275,8 @@ rightline=false,
 leftline=true,
 topline=false,
 bottomline=false,
-backgroundcolor=ocre!10,
-linecolor=ocre,
+backgroundcolor=dzblue!10,
+linecolor=dzblue,
 innerleftmargin=5pt,
 innerrightmargin=5pt,
 innertopmargin=5pt,
@@ -292,7 +292,7 @@ rightline=false,
 leftline=true,
 topline=false,
 bottomline=false,
-linecolor=ocre,
+linecolor=dzblue,
 innerleftmargin=5pt,
 innerrightmargin=5pt,
 innertopmargin=0pt,
@@ -320,7 +320,7 @@ innerbottommargin=5pt]{cBox}
 
 % Creates an environment for each type of theorem and assigns it a theorem text style from the "Theorem Styles" section above and a colored box from above
 \newenvironment{theorem}{\begin{tBox}\begin{theoremeT}}{\end{theoremeT}\end{tBox}}
-\newenvironment{exercise}{\begin{eBox}\begin{exerciseT}}{\hfill{\color{ocre}\tiny\ensuremath{\blacksquare}}\end{exerciseT}\end{eBox}}
+\newenvironment{exercise}{\begin{eBox}\begin{exerciseT}}{\hfill{\color{dzblue}\tiny\ensuremath{\blacksquare}}\end{exerciseT}\end{eBox}}
 \newenvironment{definition}{\begin{dBox}\begin{definitionT}}{\end{definitionT}\end{dBox}}
 \newenvironment{example}{\begin{exampleT}}{\hfill{\tiny\ensuremath{\blacksquare}}\end{exampleT}}
 \newenvironment{corollary}{\begin{cBox}\begin{corollaryT}}{\end{corollaryT}\end{cBox}}
@@ -334,7 +334,7 @@ innerbottommargin=5pt]{cBox}
 \leftmargin=35pt % Indentation on the left
 \rightmargin=25pt}\item\ignorespaces % Indentation on the right
 \makebox[-2.5pt]{\begin{tikzpicture}[overlay]
-\node[draw=ocre!60,line width=1pt,circle,fill=ocre!25,font=\sffamily\bfseries,inner sep=2pt,outer sep=0pt] at (-15pt,0pt){\textcolor{ocre}{R}};\end{tikzpicture}} % Orange R in a circle
+\node[draw=dzblue!60,line width=1pt,circle,fill=dzblue!25,font=\sffamily\bfseries,inner sep=2pt,outer sep=0pt] at (-15pt,0pt){\textcolor{dzblue}{R}};\end{tikzpicture}} % Orange R in a circle
 \advance\baselineskip -1pt}{\end{list}\vskip5pt} % Tighter line spacing and white space after remark
 
 %----------------------------------------------------------------------------------------
@@ -342,7 +342,7 @@ innerbottommargin=5pt]{cBox}
 %----------------------------------------------------------------------------------------
 
 \makeatletter
-\renewcommand{\@seccntformat}[1]{\llap{\textcolor{ocre}{\csname the#1\endcsname}\hspace{1em}}}
+\renewcommand{\@seccntformat}[1]{\llap{\textcolor{dzblue}{\csname the#1\endcsname}\hspace{1em}}}
 \renewcommand{\section}{\@startsection{section}{1}{\z@}
 {-4ex \@plus -1ex \@minus -.4ex}
 {1ex \@plus.2ex }
@@ -366,7 +366,7 @@ innerbottommargin=5pt]{cBox}
 
 % For an unclear reason, the package should be loaded now and not later
 \RequirePackage{hyperref}
-\hypersetup{hidelinks,backref=true,pagebackref=true,hyperindex=true,colorlinks=false,breaklinks=true,urlcolor= ocre,bookmarks=true,bookmarksopen=false,pdftitle={Title},pdfauthor={Author}}
+\hypersetup{hidelinks,backref=true,pagebackref=true,hyperindex=true,colorlinks=false,breaklinks=true,urlcolor= dzblue,bookmarks=true,bookmarksopen=false,pdftitle={Title},pdfauthor={Author}}
 
 %----------------------------------------------------------------------------------------
 %	CHAPTER HEADINGS
@@ -391,9 +391,9 @@ innerbottommargin=5pt]{cBox}
 \node[anchor=north west,inner sep=0pt] at (0,0) {\includegraphics[width=\paperwidth]{\thechapterimage}};
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Commenting the 3 lines below removes the small contents box in the chapter heading
-%\fill[color=ocre!10!white,opacity=.6] (1cm,0) rectangle (8cm,-7cm);
+%\fill[color=dzblue!10!white,opacity=.6] (1cm,0) rectangle (8cm,-7cm);
 %\node[anchor=north west] at (1.1cm,.35cm) {\parbox[t][8cm][t]{6.5cm}{\huge\bfseries\flushleft \printcontents{l}{1}{\setcounter{tocdepth}{2}}}};
-\draw[anchor=west] (5cm,-9cm) node [rounded corners=20pt,fill=ocre!10!white,text opacity=1,draw=ocre,draw opacity=1,line width=1.5pt,fill opacity=.6,inner sep=12pt]{\huge\sffamily\bfseries\textcolor{black}{\thechapter. #1\strut\makebox[22cm]{}}};
+\draw[anchor=west] (5cm,-9cm) node [rounded corners=20pt,fill=dzblue!10!white,text opacity=1,draw=dzblue,draw opacity=1,line width=1.5pt,fill opacity=.6,inner sep=12pt]{\huge\sffamily\bfseries\textcolor{black}{\thechapter. #1\strut\makebox[22cm]{}}};
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \end{tikzpicture}};
 \end{tikzpicture}}
@@ -411,7 +411,7 @@ innerbottommargin=5pt]{cBox}
 \node at (current page.north west)
 {\begin{tikzpicture}[remember picture,overlay]
 \node[anchor=north west,inner sep=0pt] at (0,0) {\includegraphics[width=\paperwidth]{\thechapterimage}};
-\draw[anchor=west] (5cm,-9cm) node [rounded corners=20pt,fill=ocre!10!white,fill opacity=.6,inner sep=12pt,text opacity=1,draw=ocre,draw opacity=1,line width=1.5pt]{\huge\sffamily\bfseries\textcolor{black}{#1\strut\makebox[22cm]{}}};
+\draw[anchor=west] (5cm,-9cm) node [rounded corners=20pt,fill=dzblue!10!white,fill opacity=.6,inner sep=12pt,text opacity=1,draw=dzblue,draw opacity=1,line width=1.5pt]{\huge\sffamily\bfseries\textcolor{black}{#1\strut\makebox[22cm]{}}};
 \end{tikzpicture}};
 \end{tikzpicture}}
 \par\vspace*{230\p@}

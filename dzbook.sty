@@ -104,7 +104,7 @@
     \par\vspace*{2.5cm}\relax
     {\Huge\@author}
     \par\vspace*{0.5cm}\relax
-    {\Huge\@date}
+    {\huge\@date}
   \end{flushleft}
   \clearpage
 }
@@ -112,6 +112,14 @@
 %%--------------------------------------------------------------------------------------------------
 %% table of contents
 %%--------------------------------------------------------------------------------------------------
+\ifdz@lang@zh
+  \renewcommand{\baselinestretch}{1.2}
+\else
+  \renewcommand{\baselinestretch}{1.0}
+\fi
+
+\def\tuxdot{\unskip.}
+
 \RequirePackage{titletoc} % Required for manipulating the table of contents
 
 \contentsmargin{0cm} % Removes the default margin

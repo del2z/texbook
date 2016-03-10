@@ -109,17 +109,16 @@
   \clearpage
 }
 
-%%--------------------------------------------------------------------------------------------------
-%% table of contents
-%%--------------------------------------------------------------------------------------------------
+%% default line space
 \ifdz@lang@zh
   \renewcommand{\baselinestretch}{1.2}
 \else
   \renewcommand{\baselinestretch}{1.0}
 \fi
 
-\def\tuxdot{\unskip.}
-
+%%--------------------------------------------------------------------------------------------------
+%% table of contents
+%%--------------------------------------------------------------------------------------------------
 \RequirePackage{titletoc} % Required for manipulating the table of contents
 
 \contentsmargin{0cm} % Removes the default margin
@@ -439,3 +438,6 @@ innerbottommargin=5pt]{cBox}
 \fi
 }
 \makeatother
+
+\def\tuxdot{\unskip.}
+

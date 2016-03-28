@@ -20,18 +20,33 @@
 %%--------------------------------------------------------------------------------------------------
 %% Packages required
 %%--------------------------------------------------------------------------------------------------
-\RequirePackage[top=3cm,bottom=3cm,left=3.2cm,right=3.2cm,headsep=10pt,letterpaper]{geometry} % Page margins
-\RequirePackage{titlesec} % Allows customization of titles
-\RequirePackage{graphicx} % Required for including pictures
-\graphicspath{{image/}} % Specifies the directory where pictures are stored
-\RequirePackage{lipsum} % Inserts dummy text
-\RequirePackage{tikz} % Required for drawing custom shapes
-\RequirePackage[english]{babel} % English language/hyphenation
-\RequirePackage{enumitem} % Customize lists
-\setlist{nolistsep} % Reduce spacing between bullet points and numbered lists
-\RequirePackage{booktabs} % Required for nicer horizontal rules in tables
-\RequirePackage{eso-pic} % Required for specifying an image background in the title page
-\RequirePackage{xcolor} % Required for specifying colors by name
+%% page layout and margins
+\RequirePackage[top=3cm,bottom=3cm,left=3.2cm,right=3.2cm,headsep=10pt,letterpaper]{geometry}
+
+%% including pictures
+\RequirePackage{graphicx}
+\graphicspath{{image/}}
+
+\RequirePackage{lipsum}
+
+%% drawing custom shapes
+\RequirePackage{tikz}
+
+%% English language/hyphenation
+\RequirePackage[english]{babel}
+
+%% custom lists
+\RequirePackage{enumitem}
+\setlist{nolistsep}
+
+%% horizontal rules in tables
+\RequirePackage{booktabs}
+
+%% specifying an image background in the title page
+\RequirePackage{eso-pic}
+
+%% specifying colors by name
+\RequirePackage{xcolor}
 \definecolor{dzblue}{RGB}{52,177,201}
 
 %%--------------------------------------------------------------------------------------------------
@@ -77,7 +92,7 @@
   \fi
   \begingroup
     \thispagestyle{empty}
-    \AddToShipoutPicture*{\put(0,0){\includegraphics[scale=1.25]{esahubble}}} % Image background
+    \AddToShipoutPicture*{\put(0,0){\includegraphics[scale=1.25]{esahubble}}} %% Image background
     \begin{tikzpicture}[remember picture,overlay]
       \node at (current page.north west) {%
         \begin{tikzpicture}[remember picture,overlay]
@@ -116,54 +131,39 @@
   \renewcommand{\baselinestretch}{1.0}
 \fi
 
+%% default vertical space of tables
+\renewcommand{\arraystretch}{1.2}
+
 %%--------------------------------------------------------------------------------------------------
 %% table of contents
 %%--------------------------------------------------------------------------------------------------
-\RequirePackage{titletoc} % Required for manipulating the table of contents
+%% manipulating the table of contents
+\RequirePackage{titletoc}
+\contentsmargin{0cm} %% Removes the default margin
 
-\contentsmargin{0cm} % Removes the default margin
-% Chapter text styling
-\titlecontents{chapter}[1.25cm] % Indentation
-{\addvspace{15pt}\large\sffamily\bfseries} % Spacing and font options for chapters
-{\color{dzblue!60}\contentslabel[\Large\thecontentslabel]{1.25cm}\color{dzblue}} % Chapter number
+\titlecontents{chapter}[1cm]
+{\addvspace{15pt}\large\sffamily\bfseries}
+{\color{dzblue!60}\contentslabel[\large\thecontentslabel]{1cm}\color{dzblue}} %% Chapter number
 {}
-{\color{dzblue!60}\normalsize\sffamily\bfseries\;\titlerule*[.5pc]{.}\;\thecontentspage} % Page number
-% Section text styling
-\titlecontents{section}[1.25cm] % Indentation
-{\addvspace{5pt}\sffamily\bfseries} % Spacing and font options for sections
-{\contentslabel[\thecontentslabel]{1.25cm}} % Section number
+{\color{dzblue!60}\large\sffamily\bfseries\;\titlerule*[.5pc]{.}\;\thecontentspage} %% Page number
+
+\titlecontents{section}[2cm]
+{\addvspace{5pt}\sffamily\bfseries}
+{\contentslabel[\thecontentslabel]{1cm}} %% Section number
 {}
-{\sffamily\hfill\color{black}\thecontentspage} % Page number
-[]
-% Subsection text styling
-\titlecontents{subsection}[1.25cm] % Indentation
-{\addvspace{1pt}\sffamily\small} % Spacing and font options for subsections
-{\contentslabel[\thecontentslabel]{1.25cm}} % Subsection number
-{}
-{\sffamily\;\titlerule*[.5pc]{.}\;\thecontentspage} % Page number
+{\color{black}\sffamily\;\titlerule*[.5pc]{.}\;\thecontentspage} %% Page number
 []
 
-%----------------------------------------------------------------------------------------
-%	MINI TABLE OF CONTENTS IN CHAPTER HEADS
-%----------------------------------------------------------------------------------------
+\titlecontents{subsection}[3cm]
+{\addvspace{2pt}\sffamily\small}
+{\contentslabel[\thecontentslabel]{1cm}} %% Subsection number
+{}
+{\sffamily\;\titlerule*[.5pc]{.}\;\thecontentspage} %% Page number
+[]
 
-% Section text styling
-\titlecontents{lsection}[0em] % Indendating
-{\footnotesize\sffamily} % Font settings
-{}
-{}
-{}
-
-% Subsection text styling
-\titlecontents{lsubsection}[.5em] % Indentation
-{\normalfont\footnotesize\sffamily} % Font settings
-{}
-{}
-{}
-
-%----------------------------------------------------------------------------------------
-%	PAGE HEADERS
-%----------------------------------------------------------------------------------------
+%%--------------------------------------------------------------------------------------------------
+%% Header and footer style
+%%--------------------------------------------------------------------------------------------------
 \RequirePackage{fancyhdr} % Required for header and footer configuration
 
 \pagestyle{fancy}
@@ -187,10 +187,9 @@
 \newpage
 \fi}
 
-%----------------------------------------------------------------------------------------
-%	THEOREM STYLES
-%----------------------------------------------------------------------------------------
-
+%%--------------------------------------------------------------------------------------------------
+%% Theorem styles
+%%--------------------------------------------------------------------------------------------------
 \RequirePackage{amsmath,amsfonts,amssymb,amsthm} % For math equations, theorems, symbols, etc
 \numberwithin{equation}{section}
 \numberwithin{figure}{section}
@@ -385,7 +384,7 @@ innerbottommargin=5pt]{cBox}
 
 % For an unclear reason, the package should be loaded now and not later
 \RequirePackage{hyperref}
-\hypersetup{hidelinks,backref=true,pagebackref=true,hyperindex=true,colorlinks=false,breaklinks=true,urlcolor= dzblue,bookmarks=true,bookmarksopen=false,pdftitle={Title},pdfauthor={Author}}
+\hypersetup{unicode,hidelinks,backref=true,pagebackref=true,hyperindex=true,colorlinks=false,breaklinks=true,urlcolor=dzblue,bookmarks=true,bookmarksopen=false,pdftitle={Title},pdfauthor={Author}}
 
 %----------------------------------------------------------------------------------------
 %	CHAPTER HEADINGS

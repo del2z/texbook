@@ -15,43 +15,31 @@
 
 \documentclass[11pt,fleqn]{book} % Default font size and left-justified equations
 
-\usepackage{xcolor} % Required for specifying colors by name
-\definecolor{ocre}{RGB}{52,177,201} % Define the orange color used for highlighting throughout the book
+\usepackage{dzbook}
 
 % Font Settings
 \usepackage{avant} % Use the Avantgarde font for headings
 %\usepackage{times} % Use the Times font for headings
-\usepackage{mathptmx} % Use the Adobe Times Roman as the default text font together with math symbols from the Sym­bol, Chancery and Com­puter Modern fonts
 
 \usepackage{microtype} % Slightly tweak font spacing for aesthetics
-\usepackage[utf8]{inputenc} % Required for including letters with accents
-\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
 
 % Bibliography
 \usepackage[style=alphabetic,sorting=nyt,sortcites=true,autopunct=true,babel=hyphen,hyperref=true,abbreviate=false,backref=true,backend=biber]{biblatex}
 \addbibresource{bibliography.bib} % BibTeX bibliography file
 \defbibheading{bibempty}{}
-
-\usepackage{CJKutf8}
-\usepackage[zh]{dzbook}
-%\input{structure} % Insert the commands.tex file which contains the majority of the structure behind the template
+\watermark{DRAFT} % Should be placed before \makecover
 
 \begin{document}
 %----------------------------------------------------------------------------------------
 %	TITLE PAGE
 %----------------------------------------------------------------------------------------
+\title{Pattern Recognition and Machine Learning}
+\author{Andrea Hidalgo}
+\date{2016-03-02}
+\makecover
 
-\begingroup
-\thispagestyle{empty}
-\AddToShipoutPicture*{\put(0,0){\includegraphics[scale=1.25]{esahubble}}} % Image background
-\centering
-\vspace*{5cm}
-\par\normalfont\fontsize{35}{35}\sffamily\selectfont
-\textbf{Clustering the interstellar medium}\\
-{\LARGE Data Mining and Machine Learning in Astronomy}\par % Book title
-\vspace*{1cm}
-{\Huge Andrea Hidalgo}\par % Author name
-\endgroup
+\maketitle
+
 
 %----------------------------------------------------------------------------------------
 %	COPYRIGHT PAGE
@@ -92,15 +80,20 @@
 \chapterimage{head2.png} % Chapter heading image
 
 \chapter{Introduction}
-
 \section{Motivation}\index{Motivation}
-这是中文测试。
 When I applied for the summer research internship, the title of the project was \emph{The many colours of nearby galaxies} an the description was
 \begin{quote}
 The different populations of stars in a galaxy carry the record of its past star formation history, and also affect its future. The project involves  analyzing Hubble Space Telescopes images of nearby galaxies of different types. By measuring the brightness and colours of millions of stars, we can understand the ages and compositions of the stars, and learn how the galaxy formed stars in the past. The radiation emitted by stars affects the gas in a galaxy, and thus how it will form stars in the future. We will use multi-colour images of galaxies to gain new insights into both their past and future.
 \end{quote}
 
 So, as an engineer without any astrophysics background I thougth I would be doing image processing applied to astronomy and I ended up doing so much more, but hey! You never know what you will end up doing.
+\begin{pyglist}[language=python]
+import numpy as np
+import os, sys
+
+if __name__ == "__main__":
+    sys.exit(1)
+\end{pyglist}
 
 Before comming to Canada, Pauline and I exchanged some emails where she shared me some interesting papers, webpages and an astronomy online course which later I did take, mainly the information was about a general introduction to astronomy and how astronomy images are, yes, astronomy images are completely different as any other \emph{normal} images, they are made of purely science data and every image has valuable knowledge you can learn from, and hey you will forget soon about pixels and start talking about sky coordinates.
 
